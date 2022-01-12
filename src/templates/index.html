@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>手書き文字認識</title>
+</head>
+<body>
+    {{ message }}<br>
+    <canvas id="canvas" height="400" weight="400"></canvas>
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext('2d')
+
+        var drawing = false;
+        var before_x = 0;
+        var before_y = 0;
+
+        canvas.addEventListener('mousemove', draw_canvas);
+
+        canvas.addEventListener('mousedown', function(e){
+            drawing = true;
+
+            var mouse_point = e.target.getBoundingClientRect();
+            before_x = e.clientX - mouse_point.left;
+            before_y = e.clientY - mouse_point.top;
+        });
+
+        canvas.addEventListener('mouseup', function(e){
+            drawing = false;
+        });
+
+        function draw_canvas(e){
+
+            if (!drawing) return;
+
+            var mouse_point = e.target.getBoundingClientRect();
+            x = e.clientX - mouse_point.left;
+            y = e.clientY - mouse_point.top;
+
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = '10px';
+
+            ctx.beginPath();
+            ctx.moveTo(before_x, before_y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.closePath();
+            
+            before_x = x;
+            before_y = y;
+        }
+    </script>
+</body>
+</html>
