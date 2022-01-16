@@ -5,9 +5,12 @@
 </head>
 <body>
     {{ message }}<br>
-    <canvas id="canvas" height="400" weight="400"></canvas>
+    <canvas id="canvas" height="280" width="280" style="background-color: white;"></canvas><br>
+    <button type="button" id="btn-send">判定</button>
 
     <script type="text/javascript">
+        const predict_url = "http://localhost:5000/predict"
+
         var canvas = document.getElementById("canvas")
         var ctx = canvas.getContext('2d')
 
@@ -39,7 +42,7 @@
 
             ctx.lineCap = 'round';
             ctx.strokeStyle = 'black';
-            ctx.lineWidth = '10px';
+            ctx.lineWidth = '64px';
 
             ctx.beginPath();
             ctx.moveTo(before_x, before_y);
@@ -49,6 +52,38 @@
             
             before_x = x;
             before_y = y;
+        }
+
+        document.getElementById('btn-send').addEventListener("click", function(e){
+            const image = document.getElementById("canvas").toDataURL("image/png")
+
+            const param = {
+                method : "POST",
+                headers : {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body : JSON.stringify({data : image})
+            };
+
+            sendServer(predict_url, param);
+        });
+
+        function sendServer(url, param){
+            fetch(url, param)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(json){
+                if(typeof json.predict === 'undefined'){
+                    alert("Fault 1.");
+                }else{
+                    alert("Success.");
+                    console.log(json.predict)
+                }
+            })
+            .catch(function(error){
+                alert("Fault 2.");
+            });
         }
     </script>
 </body>
