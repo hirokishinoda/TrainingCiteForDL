@@ -1,0 +1,53 @@
+body{
+    background-color: #CCFFFF;
+}
+
+/*　テープ　枠　1 */
+/* https://love-wave.com/css-waku/ */
+/* 黒板風　1 */
+.kokuban-s1 {
+    position: relative;
+    float: left;
+    margin: 2em auto;
+    padding: 1em;
+    width: 300px; /* ボックス幅 */
+    background: #202020; /* ボックス背景色 */
+    color: #fff; /* 文章色 */
+    border: 7px solid #b2771f; /* 枠線 */
+    border-radius: 3px; /* 角の丸み */
+    box-shadow: 0 0 5px #333;
+}
+.kokuban-s1::before,
+.kokuban-s1::after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+} 
+.kokuban-s1::before {
+    width: 20px;
+    right: 10px;
+    border: solid 3px #ff42a0; /*チョーク（ピンク） */
+    border-radius: 3px 2px 0 2px;
+}
+.kokuban-s1::after {
+    width: 15px; 
+    right: 45px;
+    border: solid 3px #fff; /*チョーク（白） */
+    border-radius: 8px 5px 2px 5px;
+}
+
+.kokuban-s1 #canvas{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.output{
+    height: 300px;
+    width: 300px; /* ボックス幅 */
+}
+
+.output:after{
+    display: block;
+    clear: both;
+}
