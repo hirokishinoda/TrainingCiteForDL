@@ -66,11 +66,15 @@ function sendServer(url, param){
         if(typeof json.predict === 'undefined'){
             alert("Fault 1.");
         }else{
-            alert("Success.");
             console.log(json.predict)
+            for (i = 1; i < 11; i++){
+                var result_tab = document.getElementById("result-table")
+                result_tab.rows[1].cells[i].innerText = json.predict[i-1];
+            }
         }
     })
     .catch(function(error){
         alert("Fault 2.");
+        console.log(error);
     });
 }

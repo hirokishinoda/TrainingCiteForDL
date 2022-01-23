@@ -56,9 +56,10 @@ def predict():
     model.eval()
 
     # predict
-    output = F.softmax(model(image)).squeeze(0)
+    output = F.softmax(model(image)).squeeze(0).tolist()
+    output = ['{:.2f}'.format(round(val, 4)) for val in output]
     #_, prediction = torch.max(output, 1)
 
-    return jsonify({"predict":str(output), 'status':200})
+    return jsonify({"predict":output, 'status':200})
 
 app.run(port=5000, debug=True)
