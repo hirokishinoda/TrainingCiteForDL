@@ -1,5 +1,11 @@
 body{
-    background-color: #CCFFFF;
+    background-color: #e2fdfd;
+}
+
+.input-output {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 /*　テープ　枠　1 */
@@ -7,10 +13,9 @@ body{
 /* 黒板風　1 */
 .kokuban-s1 {
     position: relative;
-    float: left;
     margin: 2em auto;
     padding: 1em;
-    width: 300px; /* ボックス幅 */
+    width: 350px; /* ボックス幅 */
     background: #202020; /* ボックス背景色 */
     color: #fff; /* 文章色 */
     border: 7px solid #b2771f; /* 枠線 */
@@ -43,11 +48,33 @@ body{
 }
 
 .output{
-    height: 300px;
-    width: 300px; /* ボックス幅 */
+    position: relative;
+    vertical-align: middle;
+    margin: 2em auto;
+    padding: 1em;
+    width: 300px;
 }
 
-.output:after{
-    display: block;
-    clear: both;
+.output table{
+    width: 100%;
+}
+
+.output table, th, td {
+    border: solid 1px gray;
+    border-collapse: collapse;
+}
+
+.output th,td {
+    padding: 10px 10px;
+}
+
+.output table th{
+    background-color: rgb(14, 161, 167);
+    color: white;
+    
+}
+
+.output table td{
+    background-color: rgb(255, 255, 255);
+    color: black;
 }

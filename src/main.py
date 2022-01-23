@@ -20,7 +20,8 @@ app.config["JSON_AS_ASCII"] = False
 
 @app.route("/")
 def index():
-    return render_template("index.html", message="aiueo")
+    #default_val = [str(i) for i in range(10)]
+    return render_template("index.html", title="手書き文字認識")
 
 @app.route("/predict", methods=['POST'])
 def predict():
@@ -55,8 +56,8 @@ def predict():
     model.eval()
 
     # predict
-    output = F.softmax(model(image))
-    _, prediction = torch.max(output, 1)
+    output = F.softmax(model(image)).squeeze(0)
+    #_, prediction = torch.max(output, 1)
 
     return jsonify({"predict":str(output), 'status':200})
 
