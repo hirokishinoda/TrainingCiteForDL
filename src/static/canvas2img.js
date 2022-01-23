@@ -43,6 +43,10 @@ function draw_canvas(e){
     before_y = y;
 }
 
+document.getElementById('btn-clear').addEventListener("click", function(e){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
 document.getElementById('btn-send').addEventListener("click", function(e){
     const image = document.getElementById("canvas").toDataURL("image/png")
 
@@ -67,6 +71,7 @@ function sendServer(url, param){
             alert("Fault 1.");
         }else{
             console.log(json.predict)
+            // 表の書き換え部分
             for (i = 1; i < 11; i++){
                 var result_tab = document.getElementById("result-table")
                 result_tab.rows[1].cells[i].innerText = json.predict[i-1];
