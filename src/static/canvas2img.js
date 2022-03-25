@@ -1,5 +1,3 @@
-const predict_url = "http://localhost:5000/predict"
-
 var canvas = document.getElementById("canvas")
 var ctx = canvas.getContext('2d')
 
@@ -53,6 +51,7 @@ document.getElementById('btn-clear').addEventListener("click", function(e){
 // キャンバスの画像をサーバーに送るイベントを追加
 document.getElementById('btn-send').addEventListener("click", function(e){
     const image = document.getElementById("canvas").toDataURL("image/png")
+    const predict_url = "/predict"
 
     const param = {
         method : "POST",
@@ -69,6 +68,10 @@ document.getElementById('btn-send').addEventListener("click", function(e){
 function sendServer(url, param){
     fetch(url, param)
     .then(function(response){
+        console.log("response")
+        console.log(response.ok)
+        console.log(response.status)
+        console.log(response.url)
         return response.json();
     })
     .then(function(json){
@@ -85,6 +88,7 @@ function sendServer(url, param){
     })
     .catch(function(error){
         alert("Fault 2.");
+        console.log("response")
         console.log(error);
     });
 }
