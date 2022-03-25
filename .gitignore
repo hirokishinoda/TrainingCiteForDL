@@ -339,3 +339,4 @@ ASALocalRun/
 .npm
 .cache
 .local
+.bash_history
