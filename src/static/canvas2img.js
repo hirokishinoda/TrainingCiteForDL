@@ -7,6 +7,7 @@ var drawing = false;
 var before_x = 0;
 var before_y = 0;
 
+// キャンバスの描画処理イベント追加
 canvas.addEventListener('mousemove', draw_canvas);
 
 canvas.addEventListener('mousedown', function(e){
@@ -21,6 +22,7 @@ canvas.addEventListener('mouseup', function(e){
     drawing = false;
 });
 
+// キャンバスへの描画処理
 function draw_canvas(e){
 
     if (!drawing) return;
@@ -43,10 +45,12 @@ function draw_canvas(e){
     before_y = y;
 }
 
+// キャンバスの初期化（クリア）処理
 document.getElementById('btn-clear').addEventListener("click", function(e){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
+// キャンバスの画像をサーバーに送るイベントを追加
 document.getElementById('btn-send').addEventListener("click", function(e){
     const image = document.getElementById("canvas").toDataURL("image/png")
 
@@ -61,6 +65,7 @@ document.getElementById('btn-send').addEventListener("click", function(e){
     sendServer(predict_url, param);
 });
 
+// キャンバスの画像をサーバーに送る処理
 function sendServer(url, param){
     fetch(url, param)
     .then(function(response){
