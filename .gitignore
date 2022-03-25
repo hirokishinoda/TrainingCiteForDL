@@ -338,3 +338,4 @@ ASALocalRun/
 .gitconfig
 .npm
 .cache
+.local
