@@ -332,3 +332,8 @@ ASALocalRun/
 *.DS_Store
 
 *.jpg
+
+.ssh
+.vscode-server
+.gitconfig
+
