@@ -68,10 +68,6 @@ document.getElementById('btn-send').addEventListener("click", function(e){
 function sendServer(url, param){
     fetch(url, param)
     .then(function(response){
-        console.log("response")
-        console.log(response.ok)
-        console.log(response.status)
-        console.log(response.url)
         return response.json();
     })
     .then(function(json){
@@ -80,15 +76,14 @@ function sendServer(url, param){
         }else{
             console.log(json.predict)
             // 表の書き換え部分
-            for (i = 1; i < 11; i++){
+            for (i = 0; i < 10; i++){
                 var result_tab = document.getElementById("result-table")
-                result_tab.rows[1].cells[i].innerText = json.predict[i-1];
+                result_tab.rows[1].cells[i+1].innerText = json.predict[i];
             }
         }
     })
     .catch(function(error){
         alert("Fault 2.");
-        console.log("response")
         console.log(error);
     });
 }

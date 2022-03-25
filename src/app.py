@@ -52,9 +52,8 @@ def predict():
     # predict
     output = F.softmax(model(image)).squeeze(0).tolist()
     output = ['{:.2f}'.format(round(val, 4)) for val in output]
-    #_, prediction = torch.max(output, 1)
 
-    return jsonify({"predict":str(output), 'status':200})
+    return jsonify({"predict":output, 'status':200})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
