@@ -35,7 +35,6 @@ def predict():
     background.paste(image, mask=image.split()[3])
 
     image = ImageOps.invert(background.convert('L')).resize((28,28))
-    image.save('sample.jpg')
 
     # pre-processing
     transform = transforms.Compose([
