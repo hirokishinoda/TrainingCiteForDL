@@ -31,7 +31,7 @@ function draw_canvas(e){
 
     ctx.lineCap = 'round';
     ctx.strokeStyle = 'black';
-    ctx.lineWidth = '64px';
+    ctx.lineWidth = 10;
 
     ctx.beginPath();
     ctx.moveTo(before_x, before_y);
