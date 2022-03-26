@@ -4,8 +4,7 @@ import torch.nn.functional as F
 import torchvision
 from torchvision import transforms
 
-from model import ConvNet
-
+from models import CNN
 import base64
 
 from PIL import Image, ImageOps
@@ -44,7 +43,7 @@ def predict():
     image = transform(image).unsqueeze(0)
 
     # load model
-    model = ConvNet().cpu()
+    model = CNN().cpu()
     model.load_state_dict(torch.load("./convnet_state.pth", map_location='cpu'))
     model.eval()
 
