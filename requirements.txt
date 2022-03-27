@@ -1,5 +1,5 @@
-Flask=2.0.3
-torch=1.11.0a0+17540c5
-torchvision=0.12.0a0
-pillow=9.0.0
-pybase64=1.2.1
+Flask==2.0.3
+torch==1.11.0a0+17540c5
+torchvision==0.12.0a0
+pillow==9.0.0
+pybase64==1.2.1
