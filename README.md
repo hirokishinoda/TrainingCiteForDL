@@ -2,7 +2,7 @@
 
 ## サイト URL
 
-[公開先 URL](https://)
+[公開先 URL](https://training-cite-dl.herokuapp.com/)
 
 # 目的
 
