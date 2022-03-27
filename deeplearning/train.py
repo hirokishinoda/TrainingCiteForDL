@@ -1,10 +1,7 @@
 import copy
-from sklearn.model_selection import train_test_split
 import torch
 import torchvision
 import torchvision.transforms as transforms
-from torch.utils.data.dataset import Subset
-import numpy as np
 
 from models import CNN
 
