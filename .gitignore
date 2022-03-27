@@ -315,6 +315,6 @@ data
 
 # deploy setting
 .devcontainer
-./deeplearning
-./docker-compose.yml
-./Dockerfile
+deeplearning
+docker-compose.yml
+Dockerfile
