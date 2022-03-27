@@ -313,3 +313,9 @@ __pycache__/
 .netrc
 
 data
+
+# deploy
+deeplearning
+docker-compose.yml
+Dockerfile
+.devcontainer
