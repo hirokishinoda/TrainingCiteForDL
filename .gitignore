@@ -310,5 +310,6 @@ __pycache__/
 .local
 .bash_history
 .gitattributes
+.netrc
 
 data
