@@ -312,3 +312,9 @@ __pycache__/
 .gitattributes
 
 data
+
+# deploy setting
+.devcontainer
+./deeplearning
+./docker-compose.yml
+./Dockerfile
