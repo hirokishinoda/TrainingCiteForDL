@@ -3,6 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import transforms
 
+import sys
+import os
+
+sys.path.append(os.pardir)
 from models import CNN
 import base64
 
@@ -43,7 +47,7 @@ def predict():
 
     # load model
     model = CNN().cpu()
-    model.load_state_dict(torch.load("./convnet_state.pth", map_location='cpu'))
+    model.load_state_dict(torch.load("./src/convnet_state.pth", map_location='cpu'))
     model.eval()
 
     # predict
@@ -56,5 +60,5 @@ def create_app():
     app.run()
 
 if __name__ == '__main__':
-    create_app()
-    #app.run(host='0.0.0.0', port=5000, debug=True)
+    #create_app()
+    app.run(host='0.0.0.0', port=5000, debug=True)
