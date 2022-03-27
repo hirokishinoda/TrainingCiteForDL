@@ -10,11 +10,12 @@ from models import CNN
 
 # device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f'device : {device}')
 
 # paramater
 batch_size = 128
 lr = 0.001
-epochs = 50
+epochs = 10
 
 # pre-processing
 transform = transforms.Compose(
@@ -25,19 +26,13 @@ transform = transforms.Compose(
 train_dataset = torchvision.datasets.MNIST(root="./data", train=True, download=True, transform=transform)
 test_dataset = torchvision.datasets.MNIST(root='./data', train=False, download=True, transform=transform)
 
-# separate dataset
-#train_index, valid_index = train_test_split(range(len(train_dataset)), test_size=0.2)
-#valid_dataset = Subset(train_dataset, valid_index)
-#train_dataset = Subset(train_dataset, train_index)
-
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
-#valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False, num_workers=-1)
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
 
 dataset_size  = {}
 dataset_size['train'] = len(train_dataset)
-#dataset_size['valid'] = len(valid_dataset)
 dataset_size['test'] = len(test_dataset)
+
 # model
 model = CNN().to(device)
 
@@ -94,5 +89,35 @@ def train(data_loader, model, criterion, optimizer, epochs, dataset_size, is_tra
     return model
 
 model = train(train_loader, model, criterion, optimizer, epochs, dataset_size['train'], is_train=True)
+
+# test
+with torch.no_grad():
+    n_samples = 0
+    n_corrects = 0
+    n_class_correct = [0 for i in range(10)]
+    n_class_samples = [0 for i in range(10)]
+
+    for images, labels in test_loader:
+        images = images.to(device)
+        labels = labels.to(device)
+        outputs = model(images)
+
+        _,predicted = torch.max(outputs, 1)
+        n_samples += labels.size(0)
+        n_corrects += (predicted == labels).sum().item()
+
+        for i in range(len(labels)):
+            label = labels[i]
+            pred = predicted[i]
+            if (label == pred):
+                n_class_correct[label] += 1
+            n_class_samples[label] += 1
+
+    print(f'accuracy: {100.0 *n_corrects / n_samples} %')
+    
+    for i in range(10):
+        acc = 100.0 * n_class_correct[i] / n_class_samples[i]
+        print(f'Accuracy of {i}: {acc} %')
+
 model_path = '../src/convnet_state.pth'
 torch.save(model.to('cpu').state_dict(), model_path)
