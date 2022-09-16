@@ -1,5 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
+import torch
 
 class CNN(nn.Module):
     def __init__(self):
@@ -20,3 +21,24 @@ class CNN(nn.Module):
         out = self.linear2(out)
 
         return out
+
+class ResNet(nn.Module):
+    def __init__(self):
+        super(ResNet, self).__init__()
+        self.resnet = torch.hub.load('pytorch/vision:v0.10.0', 'resnet18', pretrained=True)
+        self.resnet.conv1 = nn.Conv2d(
+                                    in_channels=1,
+                                    out_channels=64,
+                                    kernel_size=self.resnet.conv1.kernel_size,
+                                    stride=self.resnet.conv1.stride,
+                                    padding=self.resnet.conv1.padding,
+                                    bias=False
+                                )
+        self.resnet.fc = nn.Linear( in_features=self.resnet.fc.in_features,
+                                    out_features=10)
+
+    def forward(self, x):
+        out = self.resnet(x)
+
+        return out
+

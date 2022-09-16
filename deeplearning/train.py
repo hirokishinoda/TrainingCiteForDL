@@ -3,7 +3,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 
-from models import CNN
+from models import CNN, ResNet
 
 # device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -19,6 +19,13 @@ transform = transforms.Compose(
     [transforms.ToTensor(),
     transforms.Normalize((0.5, ), (0.5, ))])
 
+# transform = transforms.Compose([
+#     transforms.Resize(256),
+#     transforms.CenterCrop(224),
+#     transforms.ToTensor(),
+#     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+# ])
+
 # data
 train_dataset = torchvision.datasets.MNIST(root="./data", train=True, download=True, transform=transform)
 test_dataset = torchvision.datasets.MNIST(root='./data', train=False, download=True, transform=transform)
@@ -31,7 +38,7 @@ dataset_size['train'] = len(train_dataset)
 dataset_size['test'] = len(test_dataset)
 
 # model
-model = CNN().to(device)
+model = ResNet().to(device)
 
 # loss and optimizer
 criterion = torch.nn.CrossEntropyLoss()
@@ -116,5 +123,5 @@ with torch.no_grad():
         acc = 100.0 * n_class_correct[i] / n_class_samples[i]
         print(f'Accuracy of {i}: {acc} %')
 
-model_path = '../src/convnet_state.pth'
+model_path = '../src/resnet_state.pth'
 torch.save(model.to('cpu').state_dict(), model_path)
